@@ -56,28 +56,59 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
 let fullName = [];
+runners.forEach(runner => {
+    fullName.push({"first_name": runner.first_name, "last_name": runner.last_name});
+});
 console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
 let allCaps = [];
-console.log(allCaps); 
+allCaps = runners.map(runner => {
+    runner.first_name = runner.first_name.toUpperCase();
+    return runner;
+});
+console.log(allCaps);
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
 let largeShirts = [];
+largeShirts = runners.filter(runner => {
+    return runner.shirt_size === "L";
+});
 console.log(largeShirts);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
-let ticketPriceTotal = [];
+let ticketPriceTotal = 0;
+ticketPriceTotal = runners.reduce((ticketPriceTotal, runner) => {
+    return ticketPriceTotal += runner.donation;
+}, 0);
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
+// Jabbersphere has been feeding their workers performance enhancing drugs. Their runners have been banned. Create an array of all the runners who are banned.
+let bannedRunners = [];
+bannedRunners = runners.filter(runner => {
+    return runner.company_name === "Jabbersphere";
+});
+console.log(bannedRunners);
 
 // Problem 2
+// The event director has run out of Ms for the running bibs. Find out how many runners have M in their names.
+let runnersWithMNames = [];
+runnersWithMNames = runners.filter(runner => {
+    return runner.first_name.includes("M") || runner.first_name.includes("m") || runner.last_name.includes("M") || runner.last_name.includes("m");
+});
+console.log(runnersWithMNames.length);
 
 // Problem 3
+// The event director is making a poster for the sponsors. Create an array with all the company names.
+companyNames = [];
+runners.forEach(runner => {
+    companyNames.push(runner.company_name);
+});
+console.log(companyNames);
